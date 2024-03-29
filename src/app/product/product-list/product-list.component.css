@@ -1,0 +1,10 @@
+mat-card{
+    max-width: 150px;
+    transition: transform .2s;
+}
+
+mat-card:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
