@@ -5,7 +5,7 @@
         <input matInput (keyup)="filterByName($event)"/>
     </mat-form-field>
     <mat-form-field>
-        <mat-label>Select me</mat-label>
+        <mat-label>Sort by</mat-label>
         <mat-select (selectionChange)="onSort($event.value)">
           <mat-option value="priceAsc">Price - Low to High</mat-option>
           <mat-option value="priceDesc">Price - High to Low</mat-option>

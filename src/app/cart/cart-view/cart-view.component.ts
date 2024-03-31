@@ -33,14 +33,21 @@ export class CartViewComponent implements OnInit{
   }
   
   onClickCheckOut() {
-    this.service.checkOut(this.cartItems).subscribe({
-      next: data => 
-        this.snackBar.open("Checkout successful!","",{
-          "duration":1000,
-          "horizontalPosition":"right",
-          "verticalPosition":"top"
-        })
-    });
+    if(this.cartItems.length == 0)
+      this.snackBar.open("Please add items to the cart before checkout!","",{
+        "duration":1000,
+        "horizontalPosition":"right",
+        "verticalPosition":"top"
+      });
+    else
+      this.service.checkOut(this.cartItems).subscribe({
+        next: data => 
+          this.snackBar.open("Checkout successful!","",{
+            "duration":1000,
+            "horizontalPosition":"right",
+            "verticalPosition":"top"
+          })
+      });
   }
 
   onClearAll() {
