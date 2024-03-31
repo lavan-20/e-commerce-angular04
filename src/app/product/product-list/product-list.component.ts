@@ -27,14 +27,24 @@ export class ProductListComponent implements OnInit{
   }
 
   addToCart(product: Product): void{
-    this.cartService.addCartItem(product).subscribe({next: data =>
-      this.snackBar.open("Product - "+product.title+" added to the cart!","",
+    
+    //Using mockoon
+    /*this.cartService.addCartItem(product).subscribe({next: data =>
+    this.snackBar.open("Product - "+product.title+" added to the cart!","",
       {
         duration : 2000,
         horizontalPosition: "right",
         verticalPosition: "top"
       })
-    })
+    })*/
+    //Using local storage
+    this.cartService.addCartItem(product);
+    this.snackBar.open("Product - "+product.title+" added to the cart!","",
+      {
+        duration : 2000,
+        horizontalPosition: "right",
+        verticalPosition: "top"
+      });
   }
 
   filterByName(event: Event): void{
@@ -49,7 +59,7 @@ export class ProductListComponent implements OnInit{
 
   onSort(sortValue: string) {
     if(!sortValue.length)
-      return;
+      return; 
     this.sortValue = sortValue;
     if(sortValue === "priceAsc")
       this.filteredProductList.sort((a,b)=> a.price - b.price)

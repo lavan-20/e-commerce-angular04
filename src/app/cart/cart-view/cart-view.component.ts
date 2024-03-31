@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { CartService } from '../cart.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cart-view',
@@ -12,14 +13,18 @@ export class CartViewComponent implements OnInit{
   cartItems : Product[] = [];
   totalCartValue: number = 0;
 
-  constructor(private service: CartService){}
+  constructor(private service: CartService, private snackBar: MatSnackBar){}
 
   ngOnInit(): void {
+    /* Using Mockoon
     this.service.getAllCartItems().subscribe(items => {
       this.cartItems = items;
       this.totalCartValue = this.getTotalPrice();
     }
-    )
+    )*/
+    //Using local storage
+    this.cartItems = this.service.getAllCartItems();
+    this.totalCartValue = this.getTotalPrice();
   }
   getTotalPrice() : number{
     var total: number = 0;
@@ -28,10 +33,22 @@ export class CartViewComponent implements OnInit{
   }
   
   onClickCheckOut() {
-    this.service.checkOut(this.cartItems).subscribe();
+    this.service.checkOut(this.cartItems).subscribe({
+      next: data => 
+        this.snackBar.open("Checkout successful!","",{
+          "duration":1000,
+          "horizontalPosition":"right",
+          "verticalPosition":"top"
+        })
+    });
   }
 
   onClearAll() {
-    this.service.clearAllCartItems().subscribe();
+    //Using Mockoon
+    //this.service.clearAllCartItems().subscribe();
+
+    //Using local Storage
+    this.service.clearAllCartItems();
+    this.cartItems = [];
   }
 }
