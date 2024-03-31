@@ -1,8 +1,20 @@
 <div class="container">
     <h3>Our latest collection</h3>
+    <mat-form-field class = "default-spacing">
+        <mat-label>Enter search term</mat-label>
+        <input matInput (keyup)="filterByName($event)"/>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Select me</mat-label>
+        <mat-select (selectionChange)="onSort($event.value)">
+          <mat-option value="priceAsc">Price - Low to High</mat-option>
+          <mat-option value="priceDesc">Price - High to Low</mat-option>
+        </mat-select>
+    </mat-form-field>
+
     <div fxLayout="row wrap" fxLayoutGap = "50px grid">
-        <div *ngFor="let product of productList">
-            <mat-card class="example-card">
+        <div *ngFor="let product of filteredProductList">
+            <mat-card class="example-card" (click)="addToCart(product)">
                 <img mat-card-image src="../../../assets/images/{{product.image_name}}">
                 <mat-card-content>
                     <mat-card-title>{{product.title}}</mat-card-title>

@@ -5,6 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductModule } from './product/product.module';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { CartModule } from './cart/cart.module';
+
 
 @NgModule({
   declarations: [
@@ -14,7 +18,10 @@ import { ProductModule } from './product/product.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ProductModule
+    ProductModule,
+    MatToolbarModule,
+    MatButtonModule,
+    CartModule
   ],
   providers: [],
   bootstrap: [AppComponent]
